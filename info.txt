@@ -1,0 +1,60 @@
+
+Q. What can NodeJs be used for ?
+    As great as Node.js is for “traditional” web applications, its potential uses are far broader. Microservices, REST APIs, tooling, working with the Internet of Things and even desktop applications—it’s got your back
+    it can also be used for creating command line tools
+
+Q. A couple of things that this command line tool is going to do.
+    What we’re going to build is a tool for initialising a Git repository. 
+    Sure, it’ll run git init under the hood, but it’ll do more than just that. 
+    It will also create a remote repository on Github right from the command line, allow the user to interactively create a .gitignore file and finally perform an initial commit and push
+
+
+
+Q. Why build CLI in NodeJs
+    a.you’re probably already familiar with it—and indeed, with JavaScript.
+    b.Another key advantage, as we’ll see as we go along, is that the strong Node.js ecosystem means that among the hundreds of thousands of packages available for all manner of purposes, there are a number which are specifically designed to help build powerful command-line tools.
+    c.Finally, we can use npm to manage any dependencies, rather than have to worry about OS-specific package managers such as Aptitude, Yum or Homebrew.
+
+
+ Typical workflow of a project [ mandane and repetitive tasks ]
+    a. init a local git repository using git init
+    b. Create a remote repository usually by leaving cli and firing up web browser
+    c. Add the remote git remote add origin remoteBranchName
+    d. create .gitignore 
+    c. add project files
+    d. make first commit
+    e. push to the remote repo
+
+
+    Monochrome text
+Package ~
+    Chalk       - for coloring the output
+    clui        - for addition visual components, draws command line tables, guagues and spinners
+    figlet      - to create a fancy ASCII based banner [ASCII art from text]
+    clear       - to clear the console
+    Readline    - low-level NodeJS module can be used to prompt the user and request input
+    Inquirer    - Creats CLI UI, implements simple input controls, radio buttons checkbox, but in console
+    minimist    - parses argument options
+    preferences - manage CLI app encrypted preferences
+
+
+    github      - Node wraper for github APIs
+    lodash      - JS utility best lib
+    simple-git  - runs git command in nodeJs app
+    touch       - implements of *Nix touch command
+
+
+
+
+    // Dealing with GithubA Auth
+        A function to retrieve an OAuth token for the Github API. Essentially we’re going to “exchange” the username and password for a token.
+        B Of course we don’t want users to have to enter their credentials every time they use the tool; instead, we’ll store the OAuth token for subsequent requests. This is where the preferences package comes in.
+
+    
+    Storing preferences
+        We could simply read and write to/from a JSON file.
+            a- It determines the most appropriate location for the file for you, taking into account your operating system and the current u
+            b- There’s no need to explicitly read or write to the file, you simply modify a preferences object and that’s taken care of for you in the background.
+            c- The preferences data is encrypted. That’s significant in the context of this example, since we’re going to be storing sensitive user data
+
+            // On Mac OSX/Linux, you’ll find the file in /Users/[YOUR-USERNME]/.config/preferences/ginit.pref
